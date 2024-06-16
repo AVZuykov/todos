@@ -4,10 +4,11 @@
   "description": "My webpack project",
   "private": true,
   "scripts": {
+    "start": "webpack serve --env mode=development",
     "dev": "webpack serve --env mode=development",
     "build:dev": "webpack --env mode=development",
     "build:prod": "webpack --env mode=production",
-    "test": "jest",
+    "test": "jest --watchAll",
     "lint:check": "eslint --cache \"src/**/*.{ts,tsx,js,json}\"",
     "lint": "eslint --cache \"src/**/*.{ts,tsx,js,json}\" --fix",
     "format:check": "prettier --check ./src",

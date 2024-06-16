@@ -4,7 +4,7 @@ import { Input } from 'antd'
 
 import { TaskInputProps } from './types'
 
-export const TaskInput = ({ onEnter, ...props }: TaskInputProps): ReactNode => {
+export const TaskInput = ({ onEnter }: TaskInputProps): ReactNode => {
   const [inputValue, setInputValue] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,6 @@ export const TaskInput = ({ onEnter, ...props }: TaskInputProps): ReactNode => {
 
   return (
     <Input
-      {...props}
       value={inputValue}
       onChange={handleInputChange}
       allowClear

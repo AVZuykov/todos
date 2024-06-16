@@ -1,5 +1,6 @@
 import webpack from 'webpack'
 
+import 'webpack-dev-server'
 import type { BuildOptions } from './types/config'
 
 export function buildDevServer({ isProd, port }: BuildOptions): webpack.Configuration['devServer'] {

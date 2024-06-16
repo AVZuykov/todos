@@ -1,5 +1,3 @@
-import { InputProps } from 'antd/lib/input'
-
-export interface TaskInputProps extends InputProps {
+export interface TaskInputProps {
   onEnter: (value: string) => void
 }

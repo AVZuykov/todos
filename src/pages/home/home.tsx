@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-import { Col, Row, Typography } from 'antd'
+import { Col, Flex, Row, Typography } from 'antd'
 
 import { TaskInput, TaskList } from '@components'
 import type { Task } from '@interfaces/task-model'
@@ -21,13 +21,15 @@ export const Home = () => {
   }
 
   return (
-    <Row align="top" justify="center" style={{ marginTop: '15vh', height: '85vh' }}>
+    <Row align="top" justify="center">
       <Col xs={{ span: 20 }} md={{ span: 12 }}>
-        <Typography.Title>Todos</Typography.Title>
+        <Flex vertical gap={24}>
+          <Typography.Title>Todos</Typography.Title>
 
-        <TaskInput onEnter={addTask} style={{ marginBottom: '1rem' }} />
+          <TaskInput onEnter={addTask} />
 
-        <TaskList tasks={tasks} setTasks={setTasks} />
+          <TaskList tasks={tasks} setTasks={setTasks} />
+        </Flex>
       </Col>
     </Row>
   )

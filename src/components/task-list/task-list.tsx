@@ -1,4 +1,4 @@
-import React, { FC, Key } from 'react'
+import React, { FC } from 'react'
 
 import { Button, Checkbox, Flex, List, Space, Tabs, Typography } from 'antd'
 

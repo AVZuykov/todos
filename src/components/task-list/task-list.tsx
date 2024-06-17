@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Button, Checkbox, Flex, List, Space, Tabs, Typography } from 'antd'
 
 import { FilterKey } from '@interfaces/filter'
-const { Text } = Typography
+
 import type { TaskListProps } from './types'
 
 export const TaskList: FC<TaskListProps> = ({
@@ -43,9 +43,12 @@ export const TaskList: FC<TaskListProps> = ({
       renderItem={(item) => (
         <List.Item key={item.id}>
           <Checkbox checked={item.completed} onChange={toggleTaskCompletion(item.id)}>
-            <Text key={item.completed ? `text-${item.id}-completed` : `text-${item.id}`} delete={item.completed}>
+            <Typography.Text
+              key={item.completed ? `text-${item.id}-completed` : `text-${item.id}`}
+              delete={item.completed}
+            >
               {item.task}
-            </Text>
+            </Typography.Text>
           </Checkbox>
         </List.Item>
       )}

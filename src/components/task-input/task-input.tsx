@@ -1,10 +1,10 @@
-import React, { ReactNode, useState } from 'react'
+import React, { FC, useState } from 'react'
 
 import { Input } from 'antd'
 
 import { TaskInputProps } from './types'
 
-export const TaskInput = ({ onEnter }: TaskInputProps): ReactNode => {
+export const TaskInput: FC<TaskInputProps> = ({ onEnter }: TaskInputProps) => {
   const [inputValue, setInputValue] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

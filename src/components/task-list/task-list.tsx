@@ -1,53 +1,38 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-import { Button, Checkbox, Flex, List, Space, Tabs } from 'antd'
+import { Button, Checkbox, Flex, List, Space, Tabs, Typography } from 'antd'
 
-import type { Filter } from '@interfaces/filter'
+import { FilterKey } from '@interfaces/filter'
+const { Text } = Typography
+import type { TaskListProps } from './types'
 
-import { TaskListProps } from './types'
-import { useTaskFilter } from './use-task-filter'
-
-const filterList: Filter[] = [
-  { key: 'all', label: 'All' },
-  { key: 'active', label: 'Active' },
-  { key: 'completed', label: 'Completed' },
-]
-
-export const TaskList = ({ setTasks, tasks }: TaskListProps) => {
-  const { filteredTasks, handleFilterChange } = useTaskFilter(tasks)
-
-  const toggleTaskCompletion = (id: number) => {
-    const newTasks = [...tasks]
-    const task = newTasks.find((task) => task.id === id)
-
-    if (task) {
-      task.completed = !task.completed
-      setTasks(newTasks)
-    }
-  }
-
-  const clearCompleted = () => {
-    setTasks(tasks.filter((task) => !task.completed))
-  }
-
-  const clearAll = () => {
-    setTasks([])
-  }
-
+export const TaskList: FC<TaskListProps> = ({
+  filteredTasks,
+  tasks,
+  filterList,
+  handleClearAll,
+  handleClearCompleted,
+  handleToggleTaskCompletion,
+  handleFilterChange,
+}) => {
   const isDisabledClearAll = tasks.length === 0
   const isDisabledClearCompleted = tasks.length === 0 || !tasks.some((task) => task.completed)
 
+  const toggleTaskCompletion = (id: string) => () => handleToggleTaskCompletion(id)
+
+  const taskCount = filteredTasks.length
+
   return (
     <List
-      header={<Tabs defaultActiveKey="all" items={filterList} onChange={handleFilterChange} />}
+      header={<Tabs defaultActiveKey={FilterKey.All} items={filterList} onChange={handleFilterChange} />}
       footer={
         <Flex justify="space-between">
-          <div>Total tasks: {filteredTasks.length}</div>
+          <div>Total tasks: {taskCount}</div>
           <Space>
-            <Button disabled={isDisabledClearAll} onClick={clearAll}>
+            <Button disabled={isDisabledClearAll} onClick={handleClearAll}>
               Clear all
             </Button>
-            <Button disabled={isDisabledClearCompleted} onClick={clearCompleted}>
+            <Button disabled={isDisabledClearCompleted} onClick={handleClearCompleted}>
               Clear completed
             </Button>
           </Space>
@@ -57,8 +42,10 @@ export const TaskList = ({ setTasks, tasks }: TaskListProps) => {
       dataSource={filteredTasks}
       renderItem={(item) => (
         <List.Item key={item.id}>
-          <Checkbox checked={item.completed} onChange={() => toggleTaskCompletion(item.id)}>
-            <span style={{ textDecoration: item.completed ? 'line-through' : 'none' }}>{item.task}</span>
+          <Checkbox checked={item.completed} onChange={toggleTaskCompletion(item.id)}>
+            <Text key={item.completed ? `text-${item.id}-completed` : `text-${item.id}`} delete={item.completed}>
+              {item.task}
+            </Text>
           </Checkbox>
         </List.Item>
       )}

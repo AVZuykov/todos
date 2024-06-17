@@ -2,7 +2,7 @@ import React from 'react'
 
 import { fireEvent, render, screen } from '@testing-library/react'
 
-import { TaskInput } from './task-input'
+import { TaskInput } from '../task-input'
 
 describe('TaskInput', () => {
   it('calls onEnter with the input value when Enter is pressed', () => {

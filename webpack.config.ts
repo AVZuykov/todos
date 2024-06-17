@@ -6,7 +6,7 @@ import type { BuildEnv, BuildPaths } from './config/build/types/config'
 
 export default (env: BuildEnv) => {
   const mode = env.mode || 'development'
-  const port = Number(env.port || 3001)
+  const port = Number(env.port || 3000)
 
   const paths: BuildPaths = {
     entry: _resolve(__dirname, 'src', 'main.tsx'),

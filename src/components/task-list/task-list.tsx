@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, Key } from 'react'
 
 import { Button, Checkbox, Flex, List, Space, Tabs, Typography } from 'antd'
 
@@ -43,10 +43,7 @@ export const TaskList: FC<TaskListProps> = ({
       renderItem={(item) => (
         <List.Item key={item.id}>
           <Checkbox checked={item.completed} onChange={toggleTaskCompletion(item.id)}>
-            <Typography.Text
-              key={item.completed ? `text-${item.id}-completed` : `text-${item.id}`}
-              delete={item.completed}
-            >
+            <Typography.Text key={+item.completed} delete={item.completed}>
               {item.task}
             </Typography.Text>
           </Checkbox>
